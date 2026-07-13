@@ -55,4 +55,20 @@ public class Teacher {
     public Set<Course> getAllCourses() {
         return Collections.unmodifiableSet(courses);
     }
+
+    // Helper Methods
+    public void addCourse(Course course) {
+        courses.add(course);                     // teacher's courses
+        course.getTeachers().add(this);
+    }
+
+    public void removeCourse(Course course) {
+        courses.remove(course);                 // teacher's courses
+        course.getTeachers().remove(this);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d %s", id, firstname, lastname);
+    }
 }
