@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -41,6 +42,13 @@ public class Course {
         return Collections.unmodifiableSet(teachers);
     }
 
+    // Constructor
+    public Course(String title, String comments, LessonType lessonType) {
+        this.title = title;
+        this.comments = comments;
+        this.lessonType = lessonType;
+    }
+
     public void addTeacher(Teacher teacher) {
         teachers.add(teacher);
         teacher.getCourses().add(this);
@@ -49,5 +57,21 @@ public class Course {
     public void removeTeacher(Teacher teacher) {
         teachers.remove(teacher);
         teacher.getCourses().remove(this);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d %s", id, title);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Course course)) return false;
+        return Objects.equals(getTitle(), course.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getTitle());
     }
 }
