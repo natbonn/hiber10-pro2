@@ -40,4 +40,14 @@ public class Course {
     public Set<Teacher> getAllTeachers() {
         return Collections.unmodifiableSet(teachers);
     }
+
+    public void addTeacher(Teacher teacher) {
+        teachers.add(teacher);
+        teacher.getCourses().add(this);
+    }
+
+    public void removeTeacher(Teacher teacher) {
+        teachers.remove(teacher);
+        teacher.getCourses().remove(this);
+    }
 }
