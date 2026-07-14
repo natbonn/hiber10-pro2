@@ -32,4 +32,23 @@ public class Region {
     public Set<Teacher> getAllTeachers() {
         return Collections.unmodifiableSet(teachers);
     }
+
+    public Region(String title) {
+        this.title = title;
+    }
+
+    public void addTeacher(Teacher teacher) {
+        teachers.add(teacher);
+        teacher.setRegion(this);
+    }
+
+    public void removeTeacher(Teacher teacher) {
+        teachers.remove(teacher);
+        teacher.setRegion(null);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d %s", id, title);
+    }
 }
